@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="RandomTowerLevelRules" format=3]
+
+[ext_resource type="Script" path="res://gameplay/tower/random_tower_level_rules.gd" id="1_rules"]
+
+[resource]
+script = ExtResource("1_rules")
+cooldown_piece_count = 10
+cooldown_min_seconds = 20.0
+cooldown_max_seconds = 60.0
+locked_top_layers = 2

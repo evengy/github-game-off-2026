@@ -1,0 +1,69 @@
+[gd_scene format=3 uid="uid://150bluftbiq8"]
+
+[ext_resource type="Script" uid="uid://b585sqw2fpkqb" path="res://gameplay/tower/piece/piece.gd" id="1_3makh"]
+[ext_resource type="Material" uid="uid://dtrf4bq2jrvvn" path="res://gameplay/tower/piece/cooldown_warning_material.tres" id="2_warning"]
+[ext_resource type="Script" uid="uid://by05xms4ly44y" path="res://gameplay/tower/piece/piece_cooldown.gd" id="3_cooldown"]
+[ext_resource type="AudioStream" uid="uid://bp37k43ejqxvh" path="res://audio/sfx/drop_sfx.ogg" id="3_w13sq"]
+[ext_resource type="Resource" path="res://channels/sfx_channel.tres" id="4_sfx"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_hkc8k"]
+friction = 0.5
+
+[sub_resource type="BoxMesh" id="BoxMesh_crb5t"]
+size = Vector3(1.5, 0.3, 0.5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_qxuyq"]
+size = Vector3(1.5, 0.3, 0.5)
+
+[node name="Piece" type="RigidBody3D" unique_id=1947677057]
+physics_material_override = SubResource("PhysicsMaterial_hkc8k")
+can_sleep = false
+contact_monitor = true
+max_contacts_reported = 4
+linear_damp = 0.2
+angular_damp = 1.4
+script = ExtResource("1_3makh")
+drag_acceleration = 100.0
+sfx_channel = ExtResource("4_sfx")
+drop_sound = ExtResource("3_w13sq")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=588485597]
+mesh = SubResource("BoxMesh_crb5t")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=244963299]
+shape = SubResource("BoxShape3D_qxuyq")
+
+[node name="Cooldown" type="Node3D" parent="." unique_id=200147999]
+script = ExtResource("3_cooldown")
+warning_time = 10.0
+warning_material = ExtResource("2_warning")
+
+[node name="CooldownTimer" type="Timer" parent="Cooldown" unique_id=1634922733]
+one_shot = true
+
+[node name="CooldownLabels" type="Node3D" parent="Cooldown" unique_id=1547963009]
+visible = false
+
+[node name="Front" type="Label3D" parent="Cooldown/CooldownLabels" unique_id=65738052]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.251)
+text = "30"
+font_size = 40
+outline_size = 10
+
+[node name="Back" type="Label3D" parent="Cooldown/CooldownLabels" unique_id=720180842]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, -0.251)
+text = "30"
+font_size = 40
+outline_size = 10
+
+[node name="Right" type="Label3D" parent="Cooldown/CooldownLabels" unique_id=1378952117]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0.751, 0, 0)
+text = "30"
+font_size = 40
+outline_size = 10
+
+[node name="Left" type="Label3D" parent="Cooldown/CooldownLabels" unique_id=492644497]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -0.751, 0, 0)
+text = "30"
+font_size = 40
+outline_size = 10

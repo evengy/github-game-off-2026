@@ -1,0 +1,134 @@
+[gd_scene format=3 uid="uid://djwn325yhd4hf"]
+
+[ext_resource type="Script" uid="uid://dxt4sn3ae7hk3" path="res://ui/shared/change_scene_button.gd" id="1_change_scene"]
+[ext_resource type="Script" path="res://ui/menu/complexity_option.gd" id="2_complexity"]
+[ext_resource type="Script" path="res://ui/menu/volume_slider.gd" id="3_volume"]
+[ext_resource type="Script" path="res://audio/music_cue.gd" id="4_music_cue"]
+[ext_resource type="Resource" path="res://channels/music_channel.tres" id="5_music_channel"]
+
+[node name="Settings" type="Control" unique_id=146164938]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="ColorRect" parent="." unique_id=10658062]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.12, 0.12, 0.14, 1)
+
+[node name="MusicCue" type="Node" parent="."]
+script = ExtResource("4_music_cue")
+channel = ExtResource("5_music_channel")
+
+[node name="Center" type="CenterContainer" parent="." unique_id=1433393549]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Box" type="VBoxContainer" parent="Center" unique_id=1594697518]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Title" type="Label" parent="Center/Box" unique_id=2103499388]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Settings"
+horizontal_alignment = 1
+
+[node name="Complexity" type="HBoxContainer" parent="Center/Box"]
+layout_mode = 2
+theme_override_constants/separation = 12
+alignment = 1
+
+[node name="Label" type="Label" parent="Center/Box/Complexity"]
+layout_mode = 2
+text = "Complexity"
+
+[node name="Option" type="OptionButton" parent="Center/Box/Complexity"]
+custom_minimum_size = Vector2(160, 0)
+layout_mode = 2
+selected = 1
+item_count = 4
+popup/item_0/text = "Easy"
+popup/item_0/id = 0
+popup/item_1/text = "Medium"
+popup/item_1/id = 1
+popup/item_2/text = "Hard"
+popup/item_2/id = 2
+popup/item_3/text = "Competitive"
+popup/item_3/id = 3
+script = ExtResource("2_complexity")
+
+[node name="MasterVolume" type="HBoxContainer" parent="Center/Box"]
+layout_mode = 2
+theme_override_constants/separation = 12
+alignment = 1
+
+[node name="Label" type="Label" parent="Center/Box/MasterVolume"]
+layout_mode = 2
+text = "Master volume"
+
+[node name="Slider" type="HSlider" parent="Center/Box/MasterVolume"]
+custom_minimum_size = Vector2(160, 0)
+layout_mode = 2
+size_flags_vertical = 4
+max_value = 1.0
+step = 0.05
+value = 1.0
+script = ExtResource("3_volume")
+bus_name = &"Master"
+
+[node name="MusicVolume" type="HBoxContainer" parent="Center/Box"]
+layout_mode = 2
+theme_override_constants/separation = 12
+alignment = 1
+
+[node name="Label" type="Label" parent="Center/Box/MusicVolume"]
+layout_mode = 2
+text = "Music volume"
+
+[node name="Slider" type="HSlider" parent="Center/Box/MusicVolume"]
+custom_minimum_size = Vector2(160, 0)
+layout_mode = 2
+size_flags_vertical = 4
+max_value = 1.0
+step = 0.05
+value = 1.0
+script = ExtResource("3_volume")
+bus_name = &"Music"
+
+[node name="SfxVolume" type="HBoxContainer" parent="Center/Box"]
+layout_mode = 2
+theme_override_constants/separation = 12
+alignment = 1
+
+[node name="Label" type="Label" parent="Center/Box/SfxVolume"]
+layout_mode = 2
+text = "SFX volume"
+
+[node name="Slider" type="HSlider" parent="Center/Box/SfxVolume"]
+custom_minimum_size = Vector2(160, 0)
+layout_mode = 2
+size_flags_vertical = 4
+max_value = 1.0
+step = 0.05
+value = 1.0
+script = ExtResource("3_volume")
+bus_name = &"SFX"
+
+[node name="Back" type="Button" parent="Center/Box" unique_id=442486152]
+custom_minimum_size = Vector2(240, 44)
+layout_mode = 2
+text = "Back"
+script = ExtResource("1_change_scene")
+target_scene = "uid://cufpfcyf3uhjp"

@@ -1,0 +1,77 @@
+[gd_scene format=3 uid="uid://csnuc6pt8oon6"]
+
+[ext_resource type="Script" uid="uid://bt5eba5kfr7ww" path="res://ui/round_end/round_end.gd" id="1_round_end"]
+[ext_resource type="Script" uid="uid://dxt4sn3ae7hk3" path="res://ui/shared/change_scene_button.gd" id="2_change_scene"]
+[ext_resource type="Script" uid="uid://b37m5scls0h53" path="res://ui/shared/quit_button.gd" id="3_quit"]
+
+[node name="RoundEnd" type="Control" unique_id=744438036]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_round_end")
+
+[node name="Dim" type="ColorRect" parent="." unique_id=684440259]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.45)
+
+[node name="Center" type="CenterContainer" parent="." unique_id=1258990037]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="PanelContainer" parent="Center" unique_id=1138062311]
+layout_mode = 2
+
+[node name="Margin" type="MarginContainer" parent="Center/Panel" unique_id=1548326657]
+layout_mode = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 24
+
+[node name="Box" type="VBoxContainer" parent="Center/Panel/Margin" unique_id=951195478]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Title" type="Label" parent="Center/Panel/Margin/Box" unique_id=2057112307]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Game Over"
+horizontal_alignment = 1
+
+[node name="Message" type="Label" parent="Center/Panel/Margin/Box" unique_id=723882767]
+layout_mode = 2
+text = "The tower collapsed."
+horizontal_alignment = 1
+
+[node name="Time" type="Label" parent="Center/Panel/Margin/Box" unique_id=436812878]
+visible = false
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Time: 00:00.00"
+horizontal_alignment = 1
+
+[node name="BackToMenu" type="Button" parent="Center/Panel/Margin/Box" unique_id=1491892995]
+custom_minimum_size = Vector2(240, 44)
+layout_mode = 2
+text = "Back to menu"
+script = ExtResource("2_change_scene")
+target_scene = "res://ui/menu/main_menu.tscn"
+
+[node name="Quit" type="Button" parent="Center/Panel/Margin/Box" unique_id=1128966976]
+custom_minimum_size = Vector2(240, 44)
+layout_mode = 2
+text = "Quit"
+script = ExtResource("3_quit")

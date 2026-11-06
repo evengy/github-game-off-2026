@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="TowerLevelRules" format=3 uid="uid://dys17f2iy8gh2"]
+
+[ext_resource type="Script" uid="uid://ciedeggjon56m" path="res://gameplay/tower/tower_level_rules.gd" id="1_rules"]
+
+[resource]
+script = ExtResource("1_rules")
+cooldown_piece_count = 12
+cooldown_min_seconds = 15.0
+cooldown_max_seconds = 45.0

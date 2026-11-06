@@ -1,0 +1,54 @@
+[gd_scene format=3 uid="uid://cfeco47e6awel"]
+
+[ext_resource type="Script" uid="uid://cd70bxlfg0efg" path="res://audio/sound_manager.gd" id="1_manager"]
+[ext_resource type="Script" uid="uid://c1l3nqmngcctv" path="res://audio/sfx_pool.gd" id="2_pool"]
+[ext_resource type="Resource" path="res://channels/music_channel.tres" id="3_music"]
+[ext_resource type="Resource" path="res://channels/sfx_channel.tres" id="4_sfx"]
+[ext_resource type="Resource" uid="uid://ckt20oxqei7ap" path="res://channels/tower_collapsed_channel.tres" id="5_collapsed"]
+[ext_resource type="Resource" uid="uid://ch4y4n6e5mjol" path="res://channels/tower_defused_channel.tres" id="6_defused"]
+[ext_resource type="AudioStream" uid="uid://qjsb3gxjsu2e" path="res://audio/music/test.mp3" id="6_gocuh"]
+
+[node name="SoundManager" type="Node" unique_id=1407273595]
+script = ExtResource("1_manager")
+music_channel = ExtResource("3_music")
+sfx_channel = ExtResource("4_sfx")
+collapsed_channel = ExtResource("5_collapsed")
+defused_channel = ExtResource("6_defused")
+menu_loop = ExtResource("6_gocuh")
+easy_loop = ExtResource("6_gocuh")
+medium_loop = ExtResource("6_gocuh")
+hard_loop = ExtResource("6_gocuh")
+competitive_loop = ExtResource("6_gocuh")
+
+[node name="MusicA" type="AudioStreamPlayer" parent="." unique_id=1297519324]
+bus = &"Music"
+
+[node name="MusicB" type="AudioStreamPlayer" parent="." unique_id=328812149]
+bus = &"Music"
+
+[node name="SfxPool" type="Node" parent="." unique_id=1559225009]
+script = ExtResource("2_pool")
+
+[node name="Sfx1" type="AudioStreamPlayer3D" parent="SfxPool" unique_id=83042454]
+bus = &"SFX"
+
+[node name="Sfx2" type="AudioStreamPlayer3D" parent="SfxPool" unique_id=392176231]
+bus = &"SFX"
+
+[node name="Sfx3" type="AudioStreamPlayer3D" parent="SfxPool" unique_id=324743532]
+bus = &"SFX"
+
+[node name="Sfx4" type="AudioStreamPlayer3D" parent="SfxPool" unique_id=1278666648]
+bus = &"SFX"
+
+[node name="Sfx5" type="AudioStreamPlayer3D" parent="SfxPool" unique_id=749671951]
+bus = &"SFX"
+
+[node name="Sfx6" type="AudioStreamPlayer3D" parent="SfxPool" unique_id=1106248550]
+bus = &"SFX"
+
+[node name="Sfx7" type="AudioStreamPlayer3D" parent="SfxPool" unique_id=2142160822]
+bus = &"SFX"
+
+[node name="Sfx8" type="AudioStreamPlayer3D" parent="SfxPool" unique_id=1258528398]
+bus = &"SFX"

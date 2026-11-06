@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://5os0i4tlv8ph"]
+
+[ext_resource type="Script" uid="uid://djtq56u4wjtg3" path="res://gameplay/tower/tower.gd" id="1_k1sas"]
+
+[node name="Tower" type="Node3D" unique_id=1752735982]
+script = ExtResource("1_k1sas")

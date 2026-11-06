@@ -1,0 +1,6 @@
+[gd_resource type="Resource" script_class="TowerDefusedChannel" format=3 uid="uid://ch4y4n6e5mjol"]
+
+[ext_resource type="Script" uid="uid://c16rpowtp41y0" path="res://channels/tower_defused_channel.gd" id="1_channel"]
+
+[resource]
+script = ExtResource("1_channel")

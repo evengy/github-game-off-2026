@@ -1,0 +1,106 @@
+[gd_scene format=3 uid="uid://borlg1hy71syo"]
+
+[ext_resource type="Script" uid="uid://b0k6n2rbdr6ki" path="res://gameplay/world.gd" id="1_8ijeg"]
+[ext_resource type="Script" uid="uid://du0n3o021mik1" path="res://common/orbit_camera.gd" id="2_8ijeg"]
+[ext_resource type="PackedScene" uid="uid://5os0i4tlv8ph" path="res://gameplay/tower/tower.tscn" id="3_a7i81"]
+[ext_resource type="Resource" uid="uid://ckt20oxqei7ap" path="res://channels/tower_collapsed_channel.tres" id="4_rfe6v"]
+[ext_resource type="Resource" uid="uid://ch4y4n6e5mjol" path="res://channels/tower_defused_channel.tres" id="5_yeylf"]
+[ext_resource type="Resource" path="res://gameplay/tower/level_rules_easy.tres" id="6_easy"]
+[ext_resource type="PackedScene" path="res://ui/round_end/round_end.tscn" id="7_qui2h"]
+[ext_resource type="Resource" path="res://gameplay/tower/level_rules_medium.tres" id="8_medium"]
+[ext_resource type="Resource" path="res://gameplay/tower/level_rules_hard.tres" id="9_hard"]
+[ext_resource type="Resource" path="res://gameplay/tower/level_rules_competitive.tres" id="10_competitive"]
+[ext_resource type="Resource" path="res://channels/competitive_time_channel.tres" id="11_time"]
+[ext_resource type="AudioStream" uid="uid://dl373tx8bh24r" path="res://audio/sfx/alarm_sfx.ogg" id="12_e8dm4"]
+[ext_resource type="Script" uid="uid://dwxut0cxlshwy" path="res://ui/round_end/round_timer.gd" id="12_timer"]
+[ext_resource type="Script" uid="uid://c80avrasljdxu" path="res://audio/music_cue.gd" id="13_music_cue"]
+[ext_resource type="Resource" path="res://channels/music_channel.tres" id="14_music_channel"]
+[ext_resource type="Script" uid="uid://cwr8d0ev0k5rn" path="res://audio/cooldown_alarm.gd" id="15_alarm"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_ig7tw"]
+size = Vector2(20, 20)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ig7tw"]
+roughness = 0.9
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_h2yge"]
+
+[node name="World" type="Node3D" unique_id=1599745509]
+script = ExtResource("1_8ijeg")
+easy_rules = ExtResource("6_easy")
+medium_rules = ExtResource("8_medium")
+hard_rules = ExtResource("9_hard")
+competitive_rules = ExtResource("10_competitive")
+collapsed_channel = ExtResource("4_rfe6v")
+defused_channel = ExtResource("5_yeylf")
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=921353216]
+current = true
+script = ExtResource("2_8ijeg")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Camera3D" unique_id=1632386928]
+transform = Transform3D(1, 0, 0, 0, 0.58591497, 0.81037253, 0, -0.81037253, 0.58591497, 0, 0, 0)
+light_energy = 1.2
+shadow_enabled = true
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1833625221]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D" unique_id=897932344]
+mesh = SubResource("PlaneMesh_ig7tw")
+surface_material_override/0 = SubResource("StandardMaterial3D_ig7tw")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=452434303]
+shape = SubResource("WorldBoundaryShape3D_h2yge")
+
+[node name="Tower" parent="." unique_id=1752735982 instance=ExtResource("3_a7i81")]
+collapsed_channel = ExtResource("4_rfe6v")
+
+[node name="MusicCue" type="Node" parent="." unique_id=565701765]
+script = ExtResource("13_music_cue")
+channel = ExtResource("14_music_channel")
+context = 1
+
+[node name="CooldownAlarm" type="AudioStreamPlayer" parent="." unique_id=1922073124]
+stream = ExtResource("12_e8dm4")
+bus = &"SFX"
+script = ExtResource("15_alarm")
+collapsed_channel = ExtResource("4_rfe6v")
+defused_channel = ExtResource("5_yeylf")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1962545897]
+
+[node name="Controls" type="Label" parent="CanvasLayer" unique_id=280246772]
+offset_left = 12.0
+offset_top = 12.0
+offset_right = 404.0
+offset_bottom = 110.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+text = "A / D: orbit camera
+Left mouse: drag a block
+R: restart round
+Pull out countdown blocks before they explode!"
+
+[node name="RoundTimer" type="Label" parent="CanvasLayer" unique_id=1381724608]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -232.0
+offset_top = 12.0
+offset_right = -12.0
+offset_bottom = 60.0
+grow_horizontal = 0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 32
+text = "00:00.00"
+horizontal_alignment = 2
+script = ExtResource("12_timer")
+collapsed_channel = ExtResource("4_rfe6v")
+defused_channel = ExtResource("5_yeylf")
+time_channel = ExtResource("11_time")
+
+[node name="RoundEnd" parent="CanvasLayer" unique_id=146785661 instance=ExtResource("7_qui2h")]
+collapsed_channel = ExtResource("4_rfe6v")
+defused_channel = ExtResource("5_yeylf")
+time_channel = ExtResource("11_time")

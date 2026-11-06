@@ -1,0 +1,103 @@
+[gd_scene format=3 uid="uid://cufpfcyf3uhjp"]
+
+[ext_resource type="Script" uid="uid://du0n3o021mik1" path="res://common/orbit_camera.gd" id="1_orbit_camera"]
+[ext_resource type="PackedScene" uid="uid://5os0i4tlv8ph" path="res://gameplay/tower/tower.tscn" id="2_tower"]
+[ext_resource type="Script" uid="uid://dxt4sn3ae7hk3" path="res://ui/shared/change_scene_button.gd" id="3_change_scene"]
+[ext_resource type="Script" uid="uid://b37m5scls0h53" path="res://ui/shared/quit_button.gd" id="4_quit"]
+[ext_resource type="Script" path="res://audio/music_cue.gd" id="5_music_cue"]
+[ext_resource type="Resource" path="res://channels/music_channel.tres" id="6_music_channel"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_ground"]
+size = Vector2(20, 20)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ground"]
+roughness = 0.9
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_ground"]
+
+[node name="MainMenu" type="Node3D" unique_id=1346707147]
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=760012418]
+current = true
+script = ExtResource("1_orbit_camera")
+player_controlled = false
+auto_spin_speed = 0.2
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Camera3D" unique_id=1507974151]
+transform = Transform3D(1, 0, 0, 0, 0.58591497, 0.81037253, 0, -0.81037253, 0.58591497, 0, 0, 0)
+light_energy = 1.2
+shadow_enabled = true
+
+[node name="Ground" type="StaticBody3D" parent="." unique_id=404576670]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ground" unique_id=1221778249]
+mesh = SubResource("PlaneMesh_ground")
+surface_material_override/0 = SubResource("StandardMaterial3D_ground")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground" unique_id=694271070]
+shape = SubResource("WorldBoundaryShape3D_ground")
+
+[node name="Tower" parent="." unique_id=583396742 instance=ExtResource("2_tower")]
+
+[node name="MusicCue" type="Node" parent="."]
+script = ExtResource("5_music_cue")
+channel = ExtResource("6_music_channel")
+
+[node name="UI" type="CanvasLayer" parent="." unique_id=1532180661]
+
+[node name="ClickBlocker" type="Control" parent="UI" unique_id=665661473]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Margin" type="MarginContainer" parent="UI/ClickBlocker" unique_id=794965719]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 80
+
+[node name="Box" type="VBoxContainer" parent="UI/ClickBlocker/Margin" unique_id=13463920]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_constants/separation = 12
+alignment = 1
+
+[node name="Title" type="Label" parent="UI/ClickBlocker/Margin/Box" unique_id=650221966]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 56
+text = "Unstable Defusion"
+
+[node name="StartNewGame" type="Button" parent="UI/ClickBlocker/Margin/Box" unique_id=1698725589]
+custom_minimum_size = Vector2(240, 44)
+layout_mode = 2
+text = "Start new game"
+script = ExtResource("3_change_scene")
+target_scene = "uid://borlg1hy71syo"
+
+[node name="Settings" type="Button" parent="UI/ClickBlocker/Margin/Box" unique_id=5503397]
+custom_minimum_size = Vector2(240, 44)
+layout_mode = 2
+text = "Settings"
+script = ExtResource("3_change_scene")
+target_scene = "res://ui/menu/settings.tscn"
+
+[node name="Credits" type="Button" parent="UI/ClickBlocker/Margin/Box" unique_id=1857670005]
+custom_minimum_size = Vector2(240, 44)
+layout_mode = 2
+text = "Credits"
+script = ExtResource("3_change_scene")
+target_scene = "res://ui/menu/credits.tscn"
+
+[node name="Quit" type="Button" parent="UI/ClickBlocker/Margin/Box" unique_id=708873561]
+custom_minimum_size = Vector2(240, 44)
+layout_mode = 2
+text = "Quit"
+script = ExtResource("4_quit")
